@@ -70,6 +70,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(SolutionDir)mysql-connector-c++\mysql-connector-c++-8.0.33-winx64\lib64\vs14;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)mysql-connector-c++\mysql-connector-c++-8.0.33-winx64\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(SolutionDir)mysql-connector-c++\mysql-connector-c++-8.0.33-winx64\lib64\vs14;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)mysql-connector-c++\mysql-connector-c++-8.0.33-winx64\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -107,6 +115,13 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)mysql-connector-c++\mysql-connector-c++-8.0.33-winx64\lib64\libcrypto-1_1-x64.dll" "$(OutDir)."
+copy "$(SolutionDir)mysql-connector-c++\mysql-connector-c++-8.0.33-winx64\lib64\libssl-1_1-x64.dll" "$(OutDir)."
+
+copy "$(SolutionDir)mysql-connector-c++\mysql-connector-c++-8.0.33-winx64\lib64\debug\mysqlcppconn8-2-vs14.dll" "$(OutDir)."
+copy "$(SolutionDir)mysql-connector-c++\mysql-connector-c++-8.0.33-winx64\lib64\debug\mysqlcppconn-9-vs14.dll" "$(OutDir)."</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
